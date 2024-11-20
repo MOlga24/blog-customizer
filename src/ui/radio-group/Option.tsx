@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { OptionType } from 'src/constants/articleProps';
 import { Text } from 'src/ui/text';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import styles from './RadioGroup.module.scss';
 
 type OptionProps = {
@@ -12,14 +12,21 @@ type OptionProps = {
 	groupName: string;
 	onChange?: (option: OptionType) => void;
 	option: OptionType;
+
 };
 
 export const Option = (props: OptionProps) => {
-	const { value, title, selected, groupName, onChange, option } = props;
+	const { value, title, selected, groupName, onChange,option } = props;
 
 	const optionRef = useRef<HTMLDivElement>(null);
 
-	const handleChange = () =>  		onChange?.(option);
+const handleChange = () => {
+
+	onChange?.(option);
+}
+
+
+
 
 	useEnterSubmit({ onChange, option });
 

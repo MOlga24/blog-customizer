@@ -175,5 +175,63 @@ export const defaultArticleState = {
 	contentWidth: contentWidthArr[0],
 	fontSizeOption: fontSizeOptions[0],
 };
-
+export type modelType ={
+	familyValue:string,
+	fontColor:string,
+	backgroundColor:string,
+	contentWidth:string,
+	fontSize:string
+}
+export const defaultArticleState1 = {
+	fontFamilyOption: fontFamilyOptions[2],
+	fontColor: fontColors[2],
+	backgroundColor: backgroundColors[2],
+	contentWidth: contentWidthArr[0],
+	fontSizeOption: fontSizeOptions[2],
+};
 export type ArticleStateType = typeof defaultArticleState;
+export const defaultArticleStateInit=[
+	{title:'Шрифт',
+	selected:fontFamilyOptions[0],
+	options:fontFamilyOptions,
+	onChange:(e:OptionType) => {
+		fontFamilyOptions[0].title = e.title;
+		fontFamilyOptions[0].className = e.className;
+		fontFamilyOptions[0].value = e.value;console.log(typeof(defaultArticleState.fontColor))}},
+					{title:' цвет шрифта',
+					selected:fontColors[0],
+					options:fontColors,
+					onChange:(e:OptionType) => {
+						fontColors[0].title = e.title;
+						fontColors[0].className = e.className;
+						fontColors[0].value = e.value;
+						fontColors[0].optionClassName=e.optionClassName;}},
+
+
+					{title:'цвет фона',
+				selected:backgroundColors[0],
+				options:backgroundColors,
+				onChange:(e:OptionType) => {
+					backgroundColors[0].title = e.title;
+					backgroundColors[0].className = e.className;
+					backgroundColors[0].value = e.value;
+					backgroundColors[0].optionClassName=e.optionClassName;
+				}},
+
+				{title:'Ширина контента',
+				selected:contentWidthArr[0],
+				options:contentWidthArr,
+				onChange:(e:OptionType) => {
+					contentWidthArr[0].title= e.title;
+					contentWidthArr[0].className = e.className;
+					contentWidthArr[0].value = e.value;
+					contentWidthArr[0].optionClassName=e.optionClassName;
+				}},
+				// {title:'размер шрифта',
+				// name:'',
+				// selected_:defaultArticleState,
+				// options:fontSizeOptions,
+				// onChange:{}}
+
+
+				]

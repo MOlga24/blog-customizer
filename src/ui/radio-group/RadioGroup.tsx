@@ -1,7 +1,7 @@
-import { OptionType } from 'src/constants/articleProps';
+import { defaultArticleState, OptionType } from 'src/constants/articleProps';
 import { Text } from 'src/ui/text';
 import { Option } from './Option';
-
+import { useEffect, useState,ChangeEvent } from 'react';
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {
@@ -13,9 +13,9 @@ type RadioGroupProps = {
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
+//	const [select, setSelect] = useState(defaultArticleState.fontSizeOption);
 	const { name, options, selected, onChange, title } = props;
-
-	const handleChange = (option: OptionType) => onChange?.(option);
+	const handleChange = (option: OptionType) => {onChange?.(option);}
 
 	return (
 		<div className={styles.container}>

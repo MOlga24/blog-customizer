@@ -1,13 +1,13 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import clsx from 'clsx';
 import styles from './ArticleParamsForm.module.scss';
 import style from '../../../src/ui/text/index.module.scss';
 import { RadioGroup } from 'src/ui/radio-group';
-import { fontFamilyOptions } from 'src/constants/articleProps';
+import { defaultArticleStateInit, fontFamilyOptions, modelType, OptionType } from 'src/constants/articleProps';
 import { fontFamilyClasses } from 'src/constants/articleProps';
-import { defaultArticleState } from 'src/constants/articleProps';
+import { defaultArticleState} from 'src/constants/articleProps';
 import { Select } from 'src/ui/select';
 import {
 	fontColors,
@@ -17,8 +17,20 @@ import {
 } from 'src/constants/articleProps';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
-export const ArticleParamsForm = () => {
+import { Option } from 'src/ui/radio-group/Option';
+type formType = {
+	active:boolean
+	onChange?: (selected: modelType) => void;
+	onClose?: () => void;
+
+};
+export const ArticleParamsForm = (props:formType) => {
 	const [isShown, setIsShown] = useState(false);
+	const [value, setValue] = useState("")
+	const handleChange = (value:string) => {
+		setValue(value)
+		console.log(value,setValue)
+	  }
 	return (
 		<>
 			<ArrowButton
@@ -31,81 +43,44 @@ export const ArticleParamsForm = () => {
 				className={clsx(styles.container, {
 					[styles.container_open]: isShown,
 				})}>
-				{isShown && <Box />}
+				{isShown && <Form />}
 			</aside>
 		</>
 	);
 };
 
- function Box() {const [fontsizevalue, setfontsizevalue] = useState<string>("");
+const Form= ()=> {
+// const [value, setValue] = useState(true);
+// const handleSubmit = () => {
+// 	defaultArticleState.backgroundColor=backgroundColors[3];
+// 	console.log(defaultArticleState.backgroundColor)
+//   ;}
+const [selected, setSelected] = useState(defaultArticleState.fontSizeOption);
+const setHandle=(e:OptionType)=>{ setSelected(e);console.log(selected)}
 	return (
 		<form className={styles.form}>
 			<Text family={'open-sans'} weight={800} size={31} uppercase>
 				Задайте параметры
 			</Text>
-			<Select
-				title={'Шрифт'}
-				selected={defaultArticleState.fontFamilyOption}
-				options={fontFamilyOptions}
-				onChange={(e) => {
-					defaultArticleState.fontFamilyOption.title = e.title;
-					defaultArticleState.fontFamilyOption.className = e.className;
-					defaultArticleState.fontFamilyOption.value = e.value;
-				}}
-				data-selected={'e.title'}></Select>
-
+			<Select  {...defaultArticleStateInit[0]}
+				/>
 			<RadioGroup
-
 				title={'размер шрифта'}
 				name=''
-				selected={defaultArticleState.fontSizeOption}
+				selected={selected}
 				options={fontSizeOptions}
-
-				onChange={(e) => {
-					//defaultArticleState.fontSizeOption.title = e.title;
-					defaultArticleState.fontSizeOption.title = e.value
-					//defaultArticleState.fontSizeOption.className = e.className;
-
-				}}
+				onChange={(e)=>{setHandle(e)}}
 				></RadioGroup>
-			<Separator> </Separator>
-			<Select
-				title={' цвет шрифта'}
-				selected={defaultArticleState.fontColor}
-				options={fontColors}
-				onChange={(e) => {
-					defaultArticleState.fontColor.title = e.title;
-					defaultArticleState.fontColor.className = e.className;
-					defaultArticleState.fontColor.value = e.value;
-					defaultArticleState.fontColor.optionClassName=e.optionClassName;
-				}}
-				></Select>
-			<Select
-				title={'цвет фона'}
-				selected={defaultArticleState.backgroundColor}
-				options={backgroundColors}
-				onChange={(e) => {
-					defaultArticleState.backgroundColor.title = e.title;
-					defaultArticleState.backgroundColor.className = e.className;
-					defaultArticleState.backgroundColor.value = e.value;
-					defaultArticleState.backgroundColor.optionClassName=e.optionClassName;
-				}}
-				></Select>
-			<Select
-				title={'Ширина контента'}
-				selected={defaultArticleState.contentWidth}
-				options={contentWidthArr}
-				onChange={(e) => {
+<Select {...defaultArticleStateInit[1]}
+				/>
+				<Separator> </Separator>
+				{defaultArticleStateInit.slice(2).map(item => <Select key={item.title} {...item}/>)}
 
-					defaultArticleState.contentWidth.title= e.title;
-					defaultArticleState.contentWidth.className = e.className;
-					defaultArticleState.contentWidth.value = e.value;
-					defaultArticleState.contentWidth.optionClassName=e.optionClassName;
-				}}
-				></Select>
 			<div className={styles.bottomContainer}>
-				<Button title='Сбросить' htmlType='reset' type='clear' />
-				<Button title='Применить' htmlType='submit' type='apply' />
+				<Button title='Сбросить' htmlType='reset'
+				//  onClick={handleSubmit}
+				  type='clear' />
+				<Button title='Применить'htmlType='submit'  type='apply' />
 			</div>
 		</form>
 	);
