@@ -1,44 +1,50 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, ReactElement } from 'react';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState,defaultArticleState1, defaultArticleStateInit, modelType  } from './constants/articleProps';
-import { OptionType } from './constants/articleProps';
+import { defaultArticleState } from './constants/articleProps';
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
-import { fontFamilyOptions, backgroundColors,contentWidthArr,fontSizeOptions,fontColors } from './constants/articleProps';
+import { ArticleStateType } from './constants/articleProps';
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
-const App = () => {
-	const model={};
-const [style, setStyle]=useState(model);
-
+const App = (): ReactElement => {
+	const [currentArticleState, setCurrentArticleState] =
+		useState<ArticleStateType>(defaultArticleState);
+	const handleChange = (value: ArticleStateType) => {
+		setCurrentArticleState(value);
+		console.log(value);
+	};
 	return (
 		<main
 			className={clsx(styles.main)}
 			style={
-
-{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
-				}as CSSProperties
-			}
-
-			>
-			<ArticleParamsForm active={true} onChange={(current)=>setStyle(current)}/>
-			<Article />
+				{
+					'--font-family': currentArticleState.fontFamilyOption.value,
+					'--font-size': currentArticleState.fontSizeOption.value,
+					'--font-color': currentArticleState.fontColor.value,
+					'--container-width': currentArticleState.contentWidth.value,
+					'--bg-color': currentArticleState.backgroundColor.value,
+				} as CSSProperties
+			}>
+			<div>
+				<ArticleParamsForm
+					options={currentArticleState}
+					onChange={(value) => {
+						handleChange(value);
+					}}
+				/>
+				<Article />
+			</div>
 		</main>
 	);
 };
 
 root.render(
 	<StrictMode>
-		<App/>
+		<App />
 	</StrictMode>
 );

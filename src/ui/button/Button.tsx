@@ -1,8 +1,7 @@
 import { Text } from 'src/ui/text';
-
 import styles from './Button.module.scss';
 import { clsx } from 'clsx';
-import { modelType } from 'src/constants/articleProps';
+
 
 export const Button = ({
 	title,
