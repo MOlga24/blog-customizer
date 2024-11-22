@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { StrictMode, CSSProperties, ReactElement } from 'react';
 import clsx from 'clsx';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
 import { defaultArticleState } from './constants/articleProps';
@@ -34,7 +34,6 @@ const App = (): ReactElement => {
 					options={currentArticleState}
 					onChange={(value) => {
 						handleChange(value);
-
 					}}
 				/>
 				<Article />

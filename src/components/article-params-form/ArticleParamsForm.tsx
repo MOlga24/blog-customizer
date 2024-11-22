@@ -8,7 +8,6 @@ import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 export type propType = {
 	options: ArticleStateType;
 	onChange: (value: ArticleStateType) => void;
-	
 };
 export const ArticleParamsForm = ({
 	options,

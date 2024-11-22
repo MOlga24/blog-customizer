@@ -12,7 +12,6 @@ type RadioGroupProps = {
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
-//	const [select, setSelect] = useState(defaultArticleState.fontSizeOption);
 	const { name, options, selected, onChange, title } = props;
 	const handleChange = (option: OptionType) => {onChange?.(option);}
 
