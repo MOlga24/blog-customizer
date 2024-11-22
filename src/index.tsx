@@ -16,7 +16,6 @@ const App = (): ReactElement => {
 		useState<ArticleStateType>(defaultArticleState);
 	const handleChange = (value: ArticleStateType) => {
 		setCurrentArticleState(value);
-		console.log(value);
 	};
 	return (
 		<main
@@ -35,6 +34,7 @@ const App = (): ReactElement => {
 					options={currentArticleState}
 					onChange={(value) => {
 						handleChange(value);
+
 					}}
 				/>
 				<Article />

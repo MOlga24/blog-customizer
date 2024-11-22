@@ -1,7 +1,6 @@
-import { defaultArticleState, OptionType } from 'src/constants/articleProps';
+import {  OptionType } from 'src/constants/articleProps';
 import { Text } from 'src/ui/text';
 import { Option } from './Option';
-import { useEffect, useState,ChangeEvent } from 'react';
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {

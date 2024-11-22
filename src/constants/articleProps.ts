@@ -178,42 +178,49 @@ export const defaultArticleState = {
 
 export type ArticleStateType = typeof defaultArticleState;
 
-export const defaultArticleStateInit=[
-	{title:'Шрифт',
-	selected:fontFamilyOptions[0],
-	options:fontFamilyOptions,
-	//onChange:(option:OptionType) => handleChange('fontSizeOption',option)},
-		},	{title:' цвет шрифта',
-					selected:fontColors[0],
-					options:fontColors,
-					onChange:(e:OptionType) => {
-						fontColors[0].title = e.title;
-						fontColors[0].className = e.className;
-						fontColors[0].value = e.value;
-						fontColors[0].optionClassName=e.optionClassName;}},
+export const defaultArticleStateInit = [
+	{
+		title: 'Шрифт',
+		selected: fontFamilyOptions[0],
+		options: fontFamilyOptions,
+		//onChange:(option:OptionType) => {handleChange('fontSizeOption',option)},
+	},
+	{
+		title: ' цвет шрифта',
+		selected: fontColors[0],
+		options: fontColors,
+		onChange: (e: OptionType) => {
+			fontColors[0].title = e.title;
+			fontColors[0].className = e.className;
+			fontColors[0].value = e.value;
+			fontColors[0].optionClassName = e.optionClassName;
+		},
+	},
 
+	{
+		title: 'цвет фона',
+		selected: backgroundColors[0],
+		options: backgroundColors,
+		onChange: (e: OptionType) => {
+			backgroundColors[0].title = e.title;
+			backgroundColors[0].className = e.className;
+			backgroundColors[0].value = e.value;
+			backgroundColors[0].optionClassName = e.optionClassName;
+		},
+	},
 
-					{title:'цвет фона',
-				selected:backgroundColors[0],
-				options:backgroundColors,
-				onChange:(e:OptionType) => {
-					backgroundColors[0].title = e.title;
-					backgroundColors[0].className = e.className;
-					backgroundColors[0].value = e.value;
-					backgroundColors[0].optionClassName=e.optionClassName;
-				}},
+	{
+		title: 'Ширина контента',
+		selected: contentWidthArr[0],
+		options: contentWidthArr,
+		onChange: (e: OptionType) => {
+			contentWidthArr[0] = e;
+		},
+	},
+	// {title:'размер шрифта',
+	// name:'',
+	// selected_:defaultArticleState,
+	// options:fontSizeOptions,
+	// onChange:{}}
+];
 
-				{title:'Ширина контента',
-				selected:contentWidthArr[0],
-				options:contentWidthArr,
-				onChange:(e:OptionType) => {
-					contentWidthArr[0] =e
-				}},
-				// {title:'размер шрифта',
-				// name:'',
-				// selected_:defaultArticleState,
-				// options:fontSizeOptions,
-				// onChange:{}}
-
-
-				]
