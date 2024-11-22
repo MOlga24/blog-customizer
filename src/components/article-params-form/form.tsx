@@ -80,12 +80,12 @@ export const Form = ({ options, onChange }: propType) => {
 				{formData.map((item) =>
 					!(item.name == 'размер шрифта') ? (
 						item.title == 'сепаратор' ? (
-							< Separator />
+							< Separator  key={item.title}/>
 						) : (
-							< Select {...item} />
+							< Select {...item}  key={item.title}/>
 						)
 					) : (
-						< RadioGroup {...item} />
+						< RadioGroup {...item}  key={item.title} />
 					)
 				)}
 			</>
