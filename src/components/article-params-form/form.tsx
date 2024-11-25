@@ -17,9 +17,9 @@ import { Text } from 'src/ui/text';
 import { propType } from './ArticleParamsForm';
 import styles from './ArticleParamsForm.module.scss';
 
-export const Form = ({ options, onChange }: propType) => {
+export const Form = (props: propType) => {
 	const [selectArticleState, setSelectArticleState] =
-		useState<ArticleStateType>(options);
+		useState<ArticleStateType>(props.options);
 	const handleChange = (key: string, value: OptionType) => {
 		setSelectArticleState({ ...selectArticleState, [key]: value });
 	};
@@ -71,7 +71,7 @@ export const Form = ({ options, onChange }: propType) => {
 			className={styles.form}
 			onSubmit={(e) => {
 				e.preventDefault();
-				onChange(selectArticleState);
+				props.onChange(selectArticleState);
 			}}>
 			<Text family={'open-sans'} weight={800} size={31} uppercase>
 				Задайте параметры
@@ -96,7 +96,7 @@ export const Form = ({ options, onChange }: propType) => {
 					type='clear'
 					onClick={() => {
 						setSelectArticleState(defaultArticleState);
-						onChange(defaultArticleState);
+						props.onChange(defaultArticleState);
 					}}
 				/>
 				<Button title='Применить' htmlType='submit' type='apply' />
