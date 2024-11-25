@@ -1,19 +1,35 @@
 import { ArrowButton } from 'src/ui/arrow-button';
-import { Button } from 'src/ui/button';
-
+import { ReactElement, useRef, useState } from 'react';
+import clsx from 'clsx';
 import styles from './ArticleParamsForm.module.scss';
-
-export const ArticleParamsForm = () => {
+import { ArticleStateType } from 'src/constants/articleProps';
+import { Form } from './form';
+import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
+export type propType = {
+	options: ArticleStateType;
+	onChange: (value: ArticleStateType) => void;
+};
+export const ArticleParamsForm = ({
+	options,
+	onChange,
+}: propType): ReactElement => {
+	const asideRef = useRef<HTMLFormElement>(null);
+	const [isOpen, setIsOpen] = useState(false);
+	useOutsideClickClose({ isOpen, rootRef: asideRef, onChange: setIsOpen });
 	return (
 		<>
-			<ArrowButton isOpen={false} onClick={() => {}} />
-			<aside className={styles.container}>
-				<form className={styles.form}>
-					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='reset' type='clear' />
-						<Button title='Применить' htmlType='submit' type='apply' />
-					</div>
-				</form>
+			<ArrowButton
+				isOpen={isOpen}
+				onClick={() => {
+					setIsOpen((current) => !current);
+				}}
+			/>
+			<aside
+				ref={asideRef}
+				className={clsx(styles.container, {
+					[styles.container_open]: isOpen,
+				})}>
+				{isOpen && <Form options={options} onChange={onChange} />}
 			</aside>
 		</>
 	);

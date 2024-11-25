@@ -13,19 +13,16 @@ module.exports = {
 			typescript: {
 				project: "tsconfig.json",
 			}
-		}
-	},
-	extends: [
-		'plugin:@typescript-eslint/recommended',
-		'plugin:prettier/recommended',
-		'prettier',
-		'plugin:react/recommended',
-		'plugin:react-hooks/recommended',
-		'plugin:import/errors',
-		'plugin:import/warnings',
-		'plugin:import/typescript',
-		'plugin:eslint-comments/recommended',
-	],
+		},
+		"postcss-modules": {
+
+            /* Обрабатываем только файлы модулей */
+      include: "**/*.module.(css|scss)",
+      exclude: "**/node_modules/**/*",
+    },
+  },
+
+	extends: ['plugin:postcss-modules/recommended','plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'prettier', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:import/typescript', 'plugin:eslint-comments/recommended', 'plugin:storybook/recommended'],
 	rules: {
 		semi: [2, 'always'],
 		quotes: [2, 'single', { avoidEscape: true }],
@@ -39,5 +36,7 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'off',
 		'import/no-named-as-default': 'off',
 		'@typescript-eslint/no-empty-function': 'off',
+		"postcss-modules/no-unused-class": "warn",
+		"postcss-modules/no-undef-class": "error"
 	},
 };
